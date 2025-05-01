@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lalalala</title>
+    </head>
+    <body>
+
+        Activity main
+        <pre><code>
+            &lt;?xml version="1.0" encoding="utf-8"?&gt;
+            &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity"
+                android:orientation="vertical"&gt;
+            
+                &lt;LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical"&gt;
+            
+                    &lt;ImageView
+                        android:id="@+id/logoImageView"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/logo_rumahsakit"
+                        android:contentDescription="Logo Rumah Sakit"
+                        android:layout_marginEnd="12dp" /&gt;
+            
+                    &lt;TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Bioadata Pasien Rumah Sakit Sinar Tanjung"
+                        android:textSize="20sp" /&gt;
+            
+                &lt;/LinearLayout&gt;
+            
+                &lt;LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Kode Pasien"
+                        android:id="@+id/kodeEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Nama Pasien"
+                        android:id="@+id/namaEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Tempat dan Tanggal Lahir"
+                        android:id="@+id/tanggalEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Jenis Kelamin"
+                        android:id="@+id/jeniskelaminEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Alamat"
+                        android:id="@+id/alamatEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawablePadding="10dp"
+                        android:hint="Patosis"
+                        android:id="@+id/patosisEditText"
+                        android:layout_weight="1"
+                        android:textSize="15sp" /&gt;
+            
+                    &lt;LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="right"&gt;
+            
+                        &lt;Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Simpan"
+                            android:layout_gravity="left"
+                            android:id="@+id/simpanButton" /&gt;
+            
+                        &lt;Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tampil"
+                            android:layout_gravity="right"
+                            android:id="@+id/tampilButton" /&gt;
+            
+                        &lt;Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:layout_gravity="left"
+                            android:id="@+id/editButton" /&gt;
+            
+                        &lt;Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hapus"
+                            android:layout_gravity="left"
+                            android:id="@+id/hapusButton" /&gt;
+            
+                    &lt;/LinearLayout&gt;
+            
+                &lt;/LinearLayout&gt;
+            
+                &lt;TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/infoTextView" /&gt;
+            
+            &lt;/LinearLayout&gt;
+            </code></pre>
+            
+
+Db helper
+
+<pre><code>
+    package com.cindy221103795.latihanmid;
+    
+    import android.content.ContentValues;
+    import android.content.Context;
+    import android.database.Cursor;
+    import android.database.sqlite.SQLiteDatabase;
+    import android.database.sqlite.SQLiteOpenHelper;
+    
+    public class DBHelper extends SQLiteOpenHelper {
+    
+        public static final String DONAME = "project.db";
+    
+        public DBHelper(Context context) {
+            super(context, "project.db", null, 1);
+        }
+    
+        @Override
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
+            sqLiteDatabase.execSQL("create table biodata(kode TEXT primary key, nama TEXT, tanggal TEXT, jeniskelamin TEXT, alamat TEXT, patosis TEXT)");
+        }
+    
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+            sqLiteDatabase.execSQL("drop table if exists biodata");
+        }
+    
+        public Boolean checkkode(String kode) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery("select * from biodata where kode=?", new String[]{kode});
+            if (cursor.getCount() > 0)
+                return true;
+            else
+                return false;
+        }
+    
+        public Boolean insertDataPasien(String kode, String nama, String tanggal, String jeniskelamin, String alamat, String patosis) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+    
+            values.put("kode", kode);
+            values.put("nama", nama);
+            values.put("tanggal", tanggal);
+            values.put("jeniskelamin", jeniskelamin);
+            values.put("alamat", alamat);
+            values.put("patosis", patosis);
+    
+            long result = db.insert("biodata", null, values);
+            if (result == 1) return false;
+            else
+                return true;
+        }
+    
+        public Cursor tampilDataPasien() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery("select * from biodata", null);
+            return cursor;
+        }
+    
+        public Boolean editDataPasien(String kode, String nama, String tanggal, String jeniskelamin, String alamat, String patosis) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+    
+            values.put("kode", kode);
+            values.put("nama", nama);
+            values.put("tanggal", tanggal);
+            values.put("jeniskelamin", jeniskelamin);
+            values.put("alamat", alamat);
+            values.put("patosis", patosis);
+    
+            long result = db.update("biodata", values, "kode=?", new String[]{kode});
+            return result != -1;
+        }
+    
+        public Boolean hapusDataPasien(String kode) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            // Delete data where the "kode" matches
+            long result = db.delete("biodata", "kode=?", new String[]{kode});
+            return result != -1;
+        }
+    
+    }
+    </code></pre>
+    
+    
+
+Main activity
+<pre><code>
+    package com.cindy221103795.latihanmid;
+    
+    import android.database.Cursor;
+    import android.os.Bundle;
+    import android.text.TextUtils;
+    import android.view.View;
+    import android.widget.Button;
+    import android.widget.EditText;
+    import android.widget.Toast;
+    
+    import androidx.activity.EdgeToEdge;
+    import androidx.appcompat.app.AlertDialog;
+    import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.graphics.Insets;
+    import androidx.core.view.ViewCompat;
+    import androidx.core.view.WindowInsetsCompat;
+    
+    public class MainActivity extends AppCompatActivity {
+    
+        EditText kode, nama, tanggal, jeniskelamin, alamat, patosis;
+        Button simpan, tampil, edit, hapus;
+        DBHelper DB;
+    
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            EdgeToEdge.enable(this);
+            setContentView(R.layout.activity_main);
+    
+            kode = findViewById(R.id.kodeEditText);
+            nama = findViewById(R.id.namaEditText);
+            tanggal = findViewById(R.id.tanggalEditText);
+            jeniskelamin = findViewById(R.id.jeniskelaminEditText);
+            alamat = findViewById(R.id.alamatEditText);
+            patosis = findViewById(R.id.patosisEditText);
+    
+            simpan = findViewById(R.id.simpanButton);
+            tampil = findViewById(R.id.tampilButton);
+            edit = findViewById(R.id.editButton);
+            hapus = findViewById(R.id.hapusButton);
+    
+            DB = new DBHelper(this);
+    
+            simpan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String kode_ps = kode.getText().toString();
+                    String nama_ps = nama.getText().toString();
+                    String tanggal_ps = tanggal.getText().toString();
+                    String jenis_kelamin = jeniskelamin.getText().toString();
+                    String alamat_ps = alamat.getText().toString();
+                    String patosis_ps = patosis.getText().toString();
+    
+                    if (TextUtils.isEmpty(kode_ps) || TextUtils.isEmpty(nama_ps) || TextUtils.isEmpty(tanggal_ps)
+                            || TextUtils.isEmpty(jenis_kelamin) || TextUtils.isEmpty(alamat_ps) || TextUtils.isEmpty(patosis_ps)) {
+                        Toast.makeText(MainActivity.this, "Semua field wajib diisi", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Boolean checkkode = DB.checkkode(kode_ps);
+                        if (!checkkode) {
+                            Boolean insert = DB.insertDataPasien(kode_ps, nama_ps, tanggal_ps, jenis_kelamin, alamat_ps, patosis_ps);
+                            if (insert) {
+                                Toast.makeText(MainActivity.this, "Data berhasil disimpan", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Data gagal disimpan", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Data sudah ada", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+    
+            tampil.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Cursor res = DB.tampilDataPasien();
+                    if (res.getCount() == 0) {
+                        Toast.makeText(MainActivity.this, "Tidak Ada Data", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+    
+                    StringBuffer buffer = new StringBuffer();
+                    while (res.moveToNext()) {
+                        buffer.append("Kode Pasien : ").append(res.getString(0)).append("\n");
+                        buffer.append("Nama Pasien : ").append(res.getString(1)).append("\n");
+                        buffer.append("Tempat dan Tanggal Lahir : ").append(res.getString(2)).append("\n");
+                        buffer.append("Jenis Kelamin : ").append(res.getString(3)).append("\n");
+                        buffer.append("Alamat : ").append(res.getString(4)).append("\n");
+                        buffer.append("Patosis : ").append(res.getString(5)).append("\n\n");
+                    }
+    
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Main
+    
+
+
+
+    </body>
+</html>
